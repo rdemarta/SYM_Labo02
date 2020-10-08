@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sym_labo02">
+    package="ch.heigvd.iict.sym.lab">
 
     <application
         android:allowBackup="true"
