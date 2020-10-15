@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SYM_Labo02</string>
+    <string name="main_asynchrone_btn">Asynchrone</string>
+    <string name="main_title">Type de transmission</string>
 </resources>
