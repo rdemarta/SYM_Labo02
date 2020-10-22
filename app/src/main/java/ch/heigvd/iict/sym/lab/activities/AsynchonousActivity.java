@@ -1,4 +1,4 @@
-package activities;
+package ch.heigvd.iict.sym.lab.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import ch.heigvd.iict.sym.lab.R;

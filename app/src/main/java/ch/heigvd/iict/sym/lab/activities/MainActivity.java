@@ -1,4 +1,4 @@
-package activities;
+package ch.heigvd.iict.sym.lab.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
