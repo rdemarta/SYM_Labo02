@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activities.AsynchronousActivity">
+    tools:context="ch.heigvd.iict.sym.lab.activities.DifferedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -20,38 +20,20 @@
             android:gravity="center_horizontal"
             android:text="@string/received_data"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/asynchronous_tvDataReceived"
+                android:id="@+id/differed_tvDataReceived"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Received data"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                tools:text="Received data" />
 
         </ScrollView>
 
     </LinearLayout>
-
-    <!-- INFINITE PROGRESS BAR (Loader) with 80% black background -->
-    <RelativeLayout
-        android:id="@+id/asynchronous_layoutLoader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000"
-        android:alpha="0.8"
-        android:visibility="gone"/>
-    <ProgressBar
-        android:id="@+id/asynchronous_loader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateTint="#FFF"
-        style="@android:style/Widget.Holo.Light.ProgressBar.Large"
-        android:visibility="gone"/>
-
 </RelativeLayout>

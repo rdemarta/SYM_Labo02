@@ -16,13 +16,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnAsynchonous = findViewById(R.id.main_btnAsynchronous);
-        btnAsynchonous.setOnClickListener(new View.OnClickListener() {
+        Button btnAsynchronous = findViewById(R.id.main_btnAsynchronous);
+        btnAsynchronous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AsynchronousActivity.class);
                 startActivity(intent);
             }
         });
+
+        Button btnDiffered = findViewById(R.id.main_btnDiffered);
+        btnDiffered.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(MainActivity.this, DifferedActivity.class);
+               startActivity(intent);
+           }
+       }
+        );
     }
 }

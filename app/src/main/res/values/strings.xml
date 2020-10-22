@@ -2,6 +2,7 @@
     <string name="app_name">SYM_Labo02</string>
     <string name="main_asynchrone_btn">Asynchrone</string>
     <string name="main_title">Type de transmission</string>
-    <string name="asynchonous_received_data">Données reçues</string>
+    <string name="received_data">Données reçues</string>
     <string name="asynchrone_actionbar_title">Transmission asynchrone</string>
+    <string name="differed">Différée</string>
 </resources>
