@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         btnDiffered.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent intent = new Intent(MainActivity.this, DifferedActivity.class);
+               Intent intent = new Intent(MainActivity.this, DeferredActivity.class);
                startActivity(intent);
            }
        }
