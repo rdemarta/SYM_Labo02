@@ -16,11 +16,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnAsynchonous = findViewById(R.id.main_btnAsynchronous);
-        btnAsynchonous.setOnClickListener(new View.OnClickListener() {
+        Button btnAsynchronous = findViewById(R.id.main_btnAsynchronous);
+        Button btnDelayed = findViewById(R.id.main_btnDelayed);
+
+        btnAsynchronous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AsynchonousActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDelayed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, DelayedActivity.class);
                 startActivity(intent);
             }
         });

@@ -7,4 +7,6 @@
     <string name="asynchronous_send">Envoyer</string>
     <string name="asyncronous_text_to_send">Texte à envoyer</string>
     <string name="asynchonous_cannot_be_empty">Ne peut pas être vide</string>
+    <string name="main_delayed_btn">Différée</string>
+    <string name="delayed_actionbar_title">Transmission différée</string>
 </resources>

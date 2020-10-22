@@ -32,10 +32,20 @@
         <!-- Asynchrone button -->
         <Button
             android:id="@+id/main_btnAsynchronous"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="60dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/main_asynchrone_btn"/>
+
+        <!-- Delayed button -->
+        <Button
+            android:id="@+id/main_btnDelayed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/main_delayed_btn"/>
 
     </LinearLayout>
 
