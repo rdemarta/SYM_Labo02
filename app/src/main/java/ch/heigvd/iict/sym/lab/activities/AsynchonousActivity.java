@@ -50,7 +50,7 @@ public class AsynchonousActivity extends AppCompatActivity {
                 }else{
                     // Recreate each time a new Thread to be able to start each time a new thread (impossible to re-run the same thread)
                     // Our thread to send the request, fetch the response and send it through the handler asynchronously
-                    final Thread thread = new Thread(new Runnable() {
+                    new Thread(new Runnable() {
                         @Override
                         public void run() {
                             SymComManager symComManager = new SymComManager();
@@ -68,9 +68,7 @@ public class AsynchonousActivity extends AppCompatActivity {
 
                             symComManager.sendRequest(serverURL, etTextToSend.getText().toString());
                         }
-                    });
-
-                    thread.start();
+                    }).start();
                 }
             }
         });
