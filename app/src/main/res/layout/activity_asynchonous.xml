@@ -13,9 +13,26 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asyncronous_text_to_send"/>
+        <EditText
+            android:id="@+id/asynchronous_etTextToSend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            />
+        <Button
+            android:id="@+id/asynchronous_btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/asynchronous_send"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
             android:gravity="center_horizontal"
             android:text="@string/asynchonous_received_data"
@@ -36,22 +53,4 @@
         </ScrollView>
 
     </LinearLayout>
-
-    <!-- INFINITE PROGRESS BAR (Loader) with 80% black background -->
-    <RelativeLayout
-        android:id="@+id/asynchronous_layoutLoader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#000"
-        android:alpha="0.8"
-        android:visibility="gone"/>
-    <ProgressBar
-        android:id="@+id/asynchronous_loader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateTint="#FFF"
-        style="@android:style/Widget.Holo.Light.ProgressBar.Large"
-        android:visibility="gone"/>
-
 </RelativeLayout>
