@@ -16,7 +16,7 @@ import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
 
-public class AsynchonousActivity extends AppCompatActivity {
+public class AsynchronousActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
