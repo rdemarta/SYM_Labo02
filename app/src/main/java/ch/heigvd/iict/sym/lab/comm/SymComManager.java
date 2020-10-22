@@ -1,5 +1,7 @@
 package ch.heigvd.iict.sym.lab.comm;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,6 +39,8 @@ public class SymComManager {
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim() + "\n");
             }
+
+            Log.d(SymComManager.class.getSimpleName(), response.toString());
 
             // Callback call to notify the response
             communicationEventListener.handleServerResponse(response.toString());

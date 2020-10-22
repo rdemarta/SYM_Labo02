@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -23,7 +25,9 @@ import ch.heigvd.iict.sym.lab.utils.Utils;
 
 public class DeferredActivity extends AppCompatActivity {
 
+    private static final String TAG ="DeferredActivity";
     private TextView tvDataReceive;
+
 
     private static class MyHandler extends Handler {
         private final WeakReference<DeferredActivity> mActivity;
@@ -64,12 +68,13 @@ public class DeferredActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if(Utils.isConnected(DeferredActivity.this.getApplicationContext())) {
+                            Log.d(TAG, "Connected !");
                             scm.sendRequest("http://sym.iict.ch/rest/txt", "Hey !");
                             timer.cancel();
                             timer.purge();
                         }
                     }
-                }, 1000);
+                }, 0, 1000);
             }
         });
 
