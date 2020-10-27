@@ -5,4 +5,5 @@
     <string name="received_data">Données reçues</string>
     <string name="asynchrone_actionbar_title">Transmission asynchrone</string>
     <string name="differed">Différée</string>
+    <string name="send">ENVOIE</string>
 </resources>

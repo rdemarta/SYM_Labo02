@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ch.heigvd.iict.sym.lab.activities.DeferredActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,18 +23,31 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/deferred_tvDataReceived"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/deferred_etDataInput"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="Received data" />
+                android:maxLines="3" />
 
-        </ScrollView>
+            <Button
+                android:id="@+id/deferred_btnSend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/send" />
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/deferred_dataList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 </RelativeLayout>
