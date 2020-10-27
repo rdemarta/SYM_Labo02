@@ -11,4 +11,13 @@
     <string name="your_age">Your age</string>
     <string name="enter_your_age">Enter your age</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="your_phone_number">Your phone number</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="enter_your_first_name">Enter your first name</string>
+    <string name="your_first_name">Your first name</string>
+    <string name="your_middle_name">Your middle name</string>
+    <string name="enter_your_middle_name">Enter your middle name</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="your_gender">Your gender</string>
 </resources>
