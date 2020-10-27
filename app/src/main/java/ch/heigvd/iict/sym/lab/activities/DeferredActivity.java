@@ -52,19 +52,19 @@ public class DeferredActivity extends AppCompatActivity {
 
         Button btnSend = findViewById(R.id.deferred_btnSend);
 
-        final ListView dataList = findViewById(R.id.deferred_dataList);
+        final ListView lvData = findViewById(R.id.deferred_dataList);
 
         final LinkedList<String> msgList = new LinkedList<>();
 
 
-        dataList.setAdapter(new ArrayAdapter<String>(this, R.layout.listitem, msgList));
+        lvData.setAdapter(new ArrayAdapter<String>(this, R.layout.listitem, msgList));
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!etDataInput.getText().toString().trim().isEmpty()) {
                     msgList.push(etDataInput.getText().toString().trim());
-                    ((BaseAdapter) dataList.getAdapter()).notifyDataSetChanged();
+                    ((BaseAdapter) lvData.getAdapter()).notifyDataSetChanged();
                     etDataInput.getText().clear();
                 } else {
                     etDataInput.setError("Nothing to send");
@@ -94,7 +94,7 @@ public class DeferredActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    ((BaseAdapter) dataList.getAdapter()).notifyDataSetChanged();
+                                    ((BaseAdapter) lvData.getAdapter()).notifyDataSetChanged();
                                 }
                             });
                         }
