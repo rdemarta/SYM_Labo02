@@ -6,4 +6,9 @@
     <string name="asynchrone_actionbar_title">Transmission asynchrone</string>
     <string name="differed">Différée</string>
     <string name="send">ENVOIE</string>
+    <string name="json">JSON</string>
+    <string name="your_name">Your name</string>
+    <string name="your_age">Your age</string>
+    <string name="enter_your_age">Enter your age</string>
+    <string name="enter_your_name">Enter your name</string>
 </resources>

@@ -27,12 +27,22 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnDiffered = findViewById(R.id.main_btnDiffered);
         btnDiffered.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(MainActivity.this, DeferredActivity.class);
-               startActivity(intent);
-           }
-       }
+                                           @Override
+                                           public void onClick(View v) {
+                                               Intent intent = new Intent(MainActivity.this, DeferredActivity.class);
+                                               startActivity(intent);
+                                           }
+                                       }
+        );
+
+        Button btnActivity = findViewById(R.id.main_btnJson);
+        btnActivity.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               Intent intent = new Intent(MainActivity.this, JsonActivity.class);
+                                               startActivity(intent);
+                                           }
+                                       }
         );
     }
 }

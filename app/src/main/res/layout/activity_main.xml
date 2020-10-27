@@ -44,6 +44,13 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/differed"/>
 
+        <Button
+            android:id="@+id/main_btnJson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/json"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
