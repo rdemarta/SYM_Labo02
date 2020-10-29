@@ -23,39 +23,20 @@ public class SymComRequest {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public HTTPMethod getHttpMethod() {
         return httpMethod;
     }
 
-    public void setHttpMethod(HTTPMethod httpMethod) {
-        this.httpMethod = httpMethod;
-    }
-
     public String getContentType() {
         return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
     }
 
     public NetworkSpeed getNetworkSpeed() {
         return networkSpeed;
     }
 
-    public void setNetworkSpeed(NetworkSpeed networkSpeed) {
-        this.networkSpeed = networkSpeed;
-    }
 }
