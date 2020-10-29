@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.User;
@@ -42,6 +43,7 @@ public class JsonActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 Log.d(LOG_TAG, msg.getData().getString(TAG_FROM_SERVER));
+                Toast.makeText(JsonActivity.this, getString(R.string.json_toast_send_successfully), Toast.LENGTH_LONG).show();
             }
         };
 

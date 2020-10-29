@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.JsonActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.JsonActivity" />
         <activity
             android:name=".activities.DelayedActivity"
             android:parentActivityName=".activities.MainActivity" />

@@ -49,6 +49,7 @@ public class DelayedActivity extends AppCompatActivity {
                         symComManager.setCommunicationEventListener(new CommunicationEventListener() {
                             @Override
                             public boolean handleServerResponse(String response) {
+                                Log.d(LOG_TAG, response);
                                 return true;
                             }
                         });
