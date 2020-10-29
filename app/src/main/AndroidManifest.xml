@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".JsonActivity"
+            android:name=".activities.JsonActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.DelayedActivity"
