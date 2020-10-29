@@ -29,7 +29,10 @@
 
     <EditText
         android:id="@+id/json_etFirstName"
-        android:layout_width="match_parent"
+        android:layout_width="ma        <ListView
+            android:id="@+id/xml_lvResponse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />tch_parent"
         android:layout_height="wrap_content"
         android:inputType="text"/>
 
