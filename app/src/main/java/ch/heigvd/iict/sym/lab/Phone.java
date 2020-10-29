@@ -1,5 +1,7 @@
 package ch.heigvd.iict.sym.lab;
 
+import android.util.Xml;
+
 public class Phone {
 
     private String phoneNumber;
@@ -9,4 +11,14 @@ public class Phone {
         this.phoneNumber = phoneNumber;
         this.type = type;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public PhoneType getType() {
+        return type;
+    }
+
+
 }

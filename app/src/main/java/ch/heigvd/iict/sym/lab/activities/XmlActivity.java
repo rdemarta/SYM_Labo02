@@ -24,6 +24,8 @@ public class XmlActivity extends AppCompatActivity {
         EditText etPhoneNumber = findViewById(R.id.xml_etPhoneNumber);
         Spinner spPhoneType = findViewById(R.id.xml_spPhoneType);
 
+
+
         /*
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE directory SYSTEM "http://sym.iict.ch/directory.dtd">
