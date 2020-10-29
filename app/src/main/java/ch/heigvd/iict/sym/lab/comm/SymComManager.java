@@ -15,21 +15,29 @@ public class SymComManager {
     private CommunicationEventListener communicationEventListener = null;
     private final static String LOG_TAG = "SYM_COM";
 
-    public void sendRequest(String strURL, String message) {
+    public void sendRequest(SymComRequest request) {
         try {
             // Init the connection
-            URL url = new URL (strURL);
+            URL url = new URL(request.getUrl());
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
 
             // SetParams
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "text/plain; utf-8");
-            con.setRequestProperty("X-Network:", "CSD"); // For the moment hardcode the bad quality
-            con.setDoOutput(true);
+            con.setRequestMethod(request.getHttpMethod().toString());
+            con.setRequestProperty("Content-Type", request.getContentType());
+
+            // We have no network speed explicitly selected => don't send header and the server will choose one randomly
+            if(request.getNetworkSpeed() != null){
+                con.setRequestProperty("X-Network:", request.getNetworkSpeed().toString());
+            }
+
+            // Set do output only for POST method
+            if(request.getHttpMethod() == HTTPMethod.POST){
+                con.setDoOutput(true);
+            }
 
             // Write the output
             OutputStream os = con.getOutputStream();
-            byte[] input = message.getBytes(StandardCharsets.UTF_8);
+            byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
 
             // Read the response

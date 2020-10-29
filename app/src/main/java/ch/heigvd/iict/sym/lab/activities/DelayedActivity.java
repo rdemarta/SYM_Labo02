@@ -14,7 +14,9 @@ import android.widget.Toast;
 import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.Utils;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
+import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
+import ch.heigvd.iict.sym.lab.comm.SymComRequest;
 
 public class DelayedActivity extends AppCompatActivity {
 
@@ -54,7 +56,13 @@ public class DelayedActivity extends AppCompatActivity {
                         // Send all msg stored in the wainting list
                         for(String valueToSend : Utils.valuesWaitingList) {
                             Log.d(LOG_TAG, "Send data \"" + valueToSend + "\"");
-                            symComManager.sendRequest(serverURL, valueToSend);
+                            symComManager.sendRequest(new SymComRequest(
+                                    serverURL,
+                                    valueToSend,
+                                    HTTPMethod.POST,
+                                    "text/plain",
+                                    null)
+                            );
                         }
 
                         // Clear the list and close the thread

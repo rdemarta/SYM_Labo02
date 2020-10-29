@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
+import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
+import ch.heigvd.iict.sym.lab.comm.SymComRequest;
 
 public class AsynchonousActivity extends AppCompatActivity {
 
@@ -66,7 +68,13 @@ public class AsynchonousActivity extends AppCompatActivity {
                                 }
                             });
 
-                            symComManager.sendRequest(serverURL, etTextToSend.getText().toString());
+                            symComManager.sendRequest(new SymComRequest(
+                                    serverURL,
+                                    etTextToSend.getText().toString(),
+                                    HTTPMethod.POST,
+                                    "test/plain",
+                                    null)
+                            );
                         }
                     }).start();
                 }
