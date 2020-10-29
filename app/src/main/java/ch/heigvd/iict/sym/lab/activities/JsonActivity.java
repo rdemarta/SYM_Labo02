@@ -1,8 +1,10 @@
-package ch.heigvd.iict.sym.lab;
+package ch.heigvd.iict.sym.lab.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import ch.heigvd.iict.sym.lab.R;
 
 public class JsonActivity extends AppCompatActivity {
 
