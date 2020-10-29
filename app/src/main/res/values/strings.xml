@@ -19,8 +19,10 @@
     <string name="xml_gender">Sexe</string>
     <string name="xml_female">Femme</string>
     <string name="xml_male">Homme</string>
-    <string name="xml_phone_number">Numéro de téléphone</string>
+    <string name="xml_phoneNumber">Numéro de téléphone</string>
     <string name="main_xml_btn">XML</string>
     <string name="xml_addInDirectory">Ajouter dans l\'anunuaire</string>
     <string name="xml_mandatoryField">Champ obligatoire</string>
+    <string name="xml_numberType">Type de numéro</string>
+    <string name="xml_phoneNumberOptional">Numéro de téléphone (Optionel)</string>
 </resources>

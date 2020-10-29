@@ -56,7 +56,8 @@ public class Directory {
                 serializer.text(p.getFirstName());
                 serializer.endTag("", "firstname");
 
-                if (p.getMiddleName() != null) {
+                // If the person doesn't have a middle name, don't add it
+                if (p.getMiddleName() != null ) {
                     serializer.startTag("", "middlename");
                     serializer.text(p.getMiddleName());
                     serializer.endTag("", "middlename");

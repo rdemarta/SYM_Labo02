@@ -19,7 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 import ch.heigvd.iict.sym.lab.Person;
 import ch.heigvd.iict.sym.lab.Phone;
@@ -47,6 +47,8 @@ public class XmlActivity extends AppCompatActivity {
         final RadioGroup rgGender = findViewById(R.id.xml_rgGender);
         final EditText etPhoneNumber = findViewById(R.id.xml_etPhoneNumber);
         final Spinner spPhoneType = findViewById(R.id.xml_spPhoneType);
+        final EditText etPhoneNumberOptional = findViewById(R.id.xml_etPhoneNumberOptional);
+        final Spinner spPhoneTypeOptional = findViewById(R.id.xml_spPhoneTypeOptional);
         final String serverURL = "http://sym.iict.ch/rest/xml";
 
 
@@ -54,6 +56,7 @@ public class XmlActivity extends AppCompatActivity {
         Button btnSend = findViewById(R.id.xml_btnSend);
 
         spPhoneType.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, PhoneType.values()));
+        spPhoneTypeOptional.setAdapter(new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, PhoneType.values()));
 
         // Create the Handler to be able to modify the UIthread when receive specific message
         final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -90,7 +93,7 @@ public class XmlActivity extends AppCompatActivity {
                 }
 
                 // No option selected
-                // TODO Does't appear after the fist time
+                // TODO Doesn't appear after the fist time
                 if (rgGender.getCheckedRadioButtonId() == -1) {
                     inputError = true;
                     lastRb.setError(getString(R.string.xml_mandatoryField));
@@ -105,19 +108,28 @@ public class XmlActivity extends AppCompatActivity {
                     return;
                 }
 
+                List<Phone> phones = new ArrayList<>();
+
                 Phone phone = new Phone(etPhoneNumber.getText().toString(), (PhoneType) spPhoneType.getSelectedItem());
+
+                phones.add(phone);
+
+                // TODO change into a recycle view to reuse the inputs for the phone number
+                // With that user can add more than 2 phone numbers
+                if(!etPhoneNumberOptional.getText().toString().isEmpty()){
+                    Phone optionalPhone =new Phone(etPhoneNumberOptional.getText().toString(), (PhoneType) spPhoneTypeOptional.getSelectedItem());
+                    phones.add(optionalPhone);
+                }
 
                 int selectedGenderId = rgGender.getCheckedRadioButtonId();
 
                 RadioButton rbSelectedGender = findViewById(selectedGenderId);
-
-                // TODO User can add a list of phone
                 Person person = new Person(etName.getText().toString(),
                         etFirstName.getText().toString(),
                         rbSelectedGender.getText().toString(),
-                        new ArrayList<>(Collections.singletonList(phone)));
+                        phones);
 
-                if (etMiddleName.getText() != null) {
+                if (!etMiddleName.getText().toString().isEmpty()) {
                     person.setMiddleName(etMiddleName.getText().toString());
                 }
 
@@ -129,6 +141,9 @@ public class XmlActivity extends AppCompatActivity {
                 rbSelectedGender.setChecked(false);
                 etPhoneNumber.getText().clear();
                 spPhoneType.setSelected(false);
+                etPhoneNumberOptional.getText().clear();
+                spPhoneTypeOptional.setSelected(false);
+
             }
         });
 
@@ -164,20 +179,6 @@ public class XmlActivity extends AppCompatActivity {
 
 
         });
-
-
-        /*
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE directory SYSTEM "http://sym.iict.ch/directory.dtd">
-        <directory>
-            <person>
-            <name>Doe</name>
-            <firstname>Joe</firstname>
-            <gender>M</gender>
-            <phone type="home">321321</phone>
-            </person>
-        </directory>
-         */
 
 
     }
