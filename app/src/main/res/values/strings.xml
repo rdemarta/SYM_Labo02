@@ -10,4 +10,8 @@
     <string name="main_delayed_btn">Différée</string>
     <string name="delayed_actionbar_title">Transmission différée</string>
     <string name="main_json_btn">JSON</string>
+    <string name="json_actionbar_title">Transmission json</string>
+    <string name="json_first_name">Prénom</string>
+    <string name="json_last_name">Nom</string>
+    <string name="json_age">Age</string>
 </resources>
