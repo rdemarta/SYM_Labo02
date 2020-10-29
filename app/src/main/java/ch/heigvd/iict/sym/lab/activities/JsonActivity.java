@@ -52,6 +52,13 @@ public class JsonActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(etLastName.getText().toString().isEmpty()) {
+                    etLastName.setError(getString(R.string.json_cannot_be_empty));
+                } else if(etfirstName.getText().toString().isEmpty()) {
+                    etfirstName.setError(getString(R.string.json_cannot_be_empty));
+                } else if(etAge.getText().toString().isEmpty()) {
+                    etAge.setError(getString(R.string.json_cannot_be_empty));
+                } else {
                     // Recreate each time a new Thread to be able to start each time a new thread (impossible to re-run the same thread)
                     // Our thread to send the request, fetch the response and send it through the handler asynchronously
                     new Thread(new Runnable() {
@@ -79,6 +86,7 @@ public class JsonActivity extends AppCompatActivity {
                             );
                         }
                     }).start();
+                }
             }
         });
 
