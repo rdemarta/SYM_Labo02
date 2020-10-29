@@ -70,6 +70,40 @@ public class XmlActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                RadioButton lastRb = findViewById(R.id.xml_rbMale);
+
+                // Clean error
+                lastRb.setError(null);
+
+
+                // Check input
+                boolean inputError = false;
+
+                if (etName.getText().toString().trim().isEmpty()) {
+                    inputError = true;
+                    etName.setError(getString(R.string.xml_mandatoryField));
+                }
+
+                if (etFirstName.getText().toString().trim().isEmpty()) {
+                    inputError = true;
+                    etFirstName.setError(getString(R.string.xml_mandatoryField));
+                }
+
+                // No option selected
+                // TODO Does't appear after the fist time
+                if (rgGender.getCheckedRadioButtonId() == -1) {
+                    inputError = true;
+                    lastRb.setError(getString(R.string.xml_mandatoryField));
+                }
+
+                if (etPhoneNumber.getText().toString().trim().isEmpty()) {
+                    inputError = true;
+                    etPhoneNumber.setError(getString(R.string.xml_mandatoryField));
+                }
+
+                if (inputError) {
+                    return;
+                }
 
                 Phone phone = new Phone(etPhoneNumber.getText().toString(), (PhoneType) spPhoneType.getSelectedItem());
 
