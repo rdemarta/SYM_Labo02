@@ -14,12 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="ch.heigvd.iict.sym.lab.activities.DelayedActivity"
-            android:parentActivityName="ch.heigvd.iict.sym.lab.activities.MainActivity" />
+            android:name=".JsonActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name="ch.heigvd.iict.sym.lab.activities.AsynchonousActivity"
-            android:parentActivityName="ch.heigvd.iict.sym.lab.activities.MainActivity" />
-        <activity android:name="ch.heigvd.iict.sym.lab.activities.MainActivity">
+            android:name=".activities.DelayedActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.AsynchonousActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

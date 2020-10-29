@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import ch.heigvd.iict.sym.lab.JsonActivity;
 import ch.heigvd.iict.sym.lab.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnAsynchronous = findViewById(R.id.main_btnAsynchronous);
         Button btnDelayed = findViewById(R.id.main_btnDelayed);
+        Button btnJson = findViewById(R.id.main_btnJson);
 
         btnAsynchronous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DelayedActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnJson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, JsonActivity.class);
                 startActivity(intent);
             }
         });

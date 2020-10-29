@@ -9,4 +9,5 @@
     <string name="asynchonous_cannot_be_empty">Ne peut pas être vide</string>
     <string name="main_delayed_btn">Différée</string>
     <string name="delayed_actionbar_title">Transmission différée</string>
+    <string name="main_json_btn">JSON</string>
 </resources>
