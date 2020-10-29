@@ -21,4 +21,5 @@
     <string name="xml_male">Homme</string>
     <string name="xml_phone_number">Numéro de téléphone</string>
     <string name="main_xml_btn">XML</string>
+    <string name="xml_addInDirectory">Ajouter dans l\'anunuaire</string>
 </resources>

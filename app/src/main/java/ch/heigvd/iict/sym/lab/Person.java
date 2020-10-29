@@ -18,6 +18,14 @@ public class Person {
         this.phones = phones;
     }
 
+    public Person(String name, String firstName, String gender, List<Phone> phones) {
+        this.name = name;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.gender = gender;
+        this.phones = phones;
+    }
+
 
     public void addPhone(Phone phone){
         phones.add(phone);
@@ -41,5 +49,9 @@ public class Person {
 
     public List<Phone> getPhones() {
         return phones;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 }
