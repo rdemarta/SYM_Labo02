@@ -24,12 +24,13 @@ public class Directory {
 
 
 
-    public List<Person> getPeople() {
-        return people;
-    }
 
     public void addPerson(Person person) {
         people.add(person);
+    }
+
+    public boolean isEmpty(){
+        return people.size() == 0;
     }
 
     public String xmlSerialize() {

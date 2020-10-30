@@ -25,4 +25,6 @@
     <string name="xml_mandatoryField">Champ obligatoire</string>
     <string name="xml_numberType">Type de numéro</string>
     <string name="xml_phoneNumberOptional">Numéro de téléphone (Optionel)</string>
+    <string name="xml_action_title">Transmission XML</string>
+    <string name="xml_toast_empty_directory">Annuaire vide, rien à envoyer</string>
 </resources>

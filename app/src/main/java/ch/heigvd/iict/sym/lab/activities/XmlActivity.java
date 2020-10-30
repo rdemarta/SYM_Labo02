@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -41,6 +40,9 @@ public class XmlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xml);
 
+        // Set the actionbar title
+        getSupportActionBar().setTitle(R.string.xml_action_title);
+
         final EditText etName = findViewById(R.id.xml_etName);
         final EditText etFirstName = findViewById(R.id.xml_etFirstName);
         final EditText etMiddleName = findViewById(R.id.xml_etMiddleName);
@@ -69,6 +71,7 @@ public class XmlActivity extends AppCompatActivity {
 
         final Directory directory = new Directory();
 
+        // Add a new person in the directory
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +106,7 @@ public class XmlActivity extends AppCompatActivity {
                     etPhoneNumber.setError(getString(R.string.xml_mandatoryField));
                 }
 
+                // Exit if at least one mandatory field is missing
                 if (inputError) {
                     return;
                 }
@@ -115,8 +119,8 @@ public class XmlActivity extends AppCompatActivity {
 
                 // TODO change into a recycle view to reuse the inputs for the phone number
                 // With that user can add more than 2 phone numbers
-                if(!etPhoneNumberOptional.getText().toString().isEmpty()){
-                    Phone optionalPhone =new Phone(etPhoneNumberOptional.getText().toString(), (PhoneType) spPhoneTypeOptional.getSelectedItem());
+                if (!etPhoneNumberOptional.getText().toString().isEmpty()) {
+                    Phone optionalPhone = new Phone(etPhoneNumberOptional.getText().toString(), (PhoneType) spPhoneTypeOptional.getSelectedItem());
                     phones.add(optionalPhone);
                 }
 
@@ -128,12 +132,14 @@ public class XmlActivity extends AppCompatActivity {
                         rbSelectedGender.getText().toString(),
                         phones);
 
+                // Add middle name only if user has one
                 if (!etMiddleName.getText().toString().isEmpty()) {
                     person.setMiddleName(etMiddleName.getText().toString());
                 }
 
                 directory.addPerson(person);
 
+                // Clean all inputs
                 etName.getText().clear();
                 etFirstName.getText().clear();
                 etMiddleName.getText().clear();
@@ -146,36 +152,45 @@ public class XmlActivity extends AppCompatActivity {
             }
         });
 
+        // Send data
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        SymComManager symComManager = new SymComManager();
-                        symComManager.setCommunicationEventListener(new CommunicationEventListener() {
-                            @Override
-                            public boolean handleServerResponse(String response) {
-                                Message msg = handler.obtainMessage();
-                                Bundle b = new Bundle();
-                                b.putString(TAG_FROM_SERVER, response);
-                                msg.setData(b);
-                                handler.sendMessage(msg);
-                                return true;
-                            }
-                        });
+                if (!directory.isEmpty()) {
 
-                        symComManager.sendRequest(new SymComRequest(
-                                serverURL,
-                                directory.xmlSerialize(),
-                                HTTPMethod.POST,
-                                "application/xml",
-                                null)
-                        );
-                    }
-                }).start();
+                    // Recreate each time a new Thread to be able to start each time a new thread (impossible to re-run the same thread)
+                    // Our thread to send the request, fetch the response and send it through the handler asynchronously
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            SymComManager symComManager = new SymComManager();
+                            symComManager.setCommunicationEventListener(new CommunicationEventListener() {
+                                @Override
+                                public boolean handleServerResponse(String response) {
+                                    Message msg = handler.obtainMessage();
+                                    Bundle b = new Bundle();
+                                    b.putString(TAG_FROM_SERVER, response);
+                                    msg.setData(b);
+                                    handler.sendMessage(msg);
+                                    return true;
+                                }
+                            });
+
+                            symComManager.sendRequest(new SymComRequest(
+                                    serverURL,
+                                    directory.xmlSerialize(),
+                                    HTTPMethod.POST,
+                                    "application/xml",
+                                    null)
+                            );
+                        }
+                    }).start();
+                } else {
+                    Toast.makeText(XmlActivity.this, R.string.xml_toast_empty_directory, Toast.LENGTH_LONG).show();
+
+                }
+
             }
-
 
         });
 
