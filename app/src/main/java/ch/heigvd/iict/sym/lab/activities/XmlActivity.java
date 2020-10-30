@@ -93,7 +93,6 @@ public class XmlActivity extends AppCompatActivity {
                 }
 
                 // No option selected
-                // TODO Doesn't appear after the fist time
                 if (rgGender.getCheckedRadioButtonId() == -1) {
                     inputError = true;
                     lastRb.setError(getString(R.string.xml_mandatoryField));
@@ -138,11 +137,11 @@ public class XmlActivity extends AppCompatActivity {
                 etName.getText().clear();
                 etFirstName.getText().clear();
                 etMiddleName.getText().clear();
-                rbSelectedGender.setChecked(false);
                 etPhoneNumber.getText().clear();
                 spPhoneType.setSelected(false);
                 etPhoneNumberOptional.getText().clear();
                 spPhoneTypeOptional.setSelected(false);
+                rgGender.clearCheck();
 
             }
         });
