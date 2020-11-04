@@ -27,4 +27,5 @@
     <string name="xml_phoneNumberOptional">Numéro de téléphone (Optionel)</string>
     <string name="xml_action_title">Transmission XML</string>
     <string name="xml_toast_empty_directory">Annuaire vide, rien à envoyer</string>
+    <string name="xml_toast_add_new_person">Nouvelle personne ajoutée dans l\'annuaire</string>
 </resources>

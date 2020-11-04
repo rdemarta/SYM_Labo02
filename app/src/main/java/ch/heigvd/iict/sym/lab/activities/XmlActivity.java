@@ -25,7 +25,7 @@ import ch.heigvd.iict.sym.lab.Phone;
 import ch.heigvd.iict.sym.lab.PhoneType;
 import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
-import ch.heigvd.iict.sym.lab.comm.Directory;
+import ch.heigvd.iict.sym.lab.Directory;
 import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
 import ch.heigvd.iict.sym.lab.comm.SymComRequest;
@@ -148,6 +148,8 @@ public class XmlActivity extends AppCompatActivity {
                 etPhoneNumberOptional.getText().clear();
                 spPhoneTypeOptional.setSelected(false);
                 rgGender.clearCheck();
+
+                Toast.makeText(XmlActivity.this, R.string.xml_toast_add_new_person, Toast.LENGTH_LONG).show();
 
             }
         });
