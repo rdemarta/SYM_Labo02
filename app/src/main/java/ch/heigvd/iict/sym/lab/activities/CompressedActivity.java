@@ -1,4 +1,4 @@
-package ch.heigvd.iict.sym.lab;
+package ch.heigvd.iict.sym.lab.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ch.heigvd.iict.sym.lab.R;
+import ch.heigvd.iict.sym.lab.User;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
 import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
@@ -28,7 +30,7 @@ public class CompressedActivity extends AppCompatActivity { // TODO move to acti
         setContentView(R.layout.activity_compressed);
 
         // Set the actionbar title
-        getSupportActionBar().setTitle(R.string.json_actionbar_title);
+        getSupportActionBar().setTitle(R.string.compressed_actionbar_title);
 
         final EditText etLastName = findViewById(R.id.compressed_etLastName);
         final EditText etfirstName = findViewById(R.id.compressed_etFirstName);

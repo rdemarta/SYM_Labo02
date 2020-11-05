@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import ch.heigvd.iict.sym.lab.CompressedActivity;
 import ch.heigvd.iict.sym.lab.R;
 
 public class MainActivity extends AppCompatActivity {
