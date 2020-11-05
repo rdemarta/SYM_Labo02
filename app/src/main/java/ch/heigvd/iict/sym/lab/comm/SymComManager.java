@@ -9,6 +9,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
 
 public class SymComManager {
 
@@ -24,6 +28,9 @@ public class SymComManager {
             // SetParams
             con.setRequestMethod(request.getHttpMethod().toString());
             con.setRequestProperty("Content-Type", request.getContentType());
+            if(request.getCompress()) {
+                con.setRequestProperty("X-Content-Encoding", "deflate");
+            }
 
             // We have no network speed explicitly selected => don't send header and the server will choose one randomly
             if(request.getNetworkSpeed() != null){
@@ -36,23 +43,33 @@ public class SymComManager {
             }
 
             // Write the output
-            OutputStream os = con.getOutputStream();
             byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
 
-            // Read the response
-            InputStreamReader in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(in);
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim() + "\n");
+            if(request.getCompress()) {
+                DeflaterOutputStream dos = new DeflaterOutputStream(con.getOutputStream(), new Deflater(0, true));
+                dos.write(input, 0, input.length); // TODO data not sent?
+
+                // Read the response
+                InflaterInputStream in = new InflaterInputStream(con.getInputStream(), new Inflater(true));
+                // TODO read results
+            } else {
+                OutputStream os = con.getOutputStream();
+                os.write(input, 0, input.length);
+
+                // Read the response
+                InputStreamReader in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(in);
+                StringBuilder response = new StringBuilder();
+                String responseLine = null;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim() + "\n");
+                }
+
+                Log.d(LOG_TAG, response.toString());
+
+                // Callback call to notify the response
+                communicationEventListener.handleServerResponse(response.toString());
             }
-
-            Log.d(LOG_TAG, response.toString());
-
-            // Callback call to notify the response
-            communicationEventListener.handleServerResponse(response.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

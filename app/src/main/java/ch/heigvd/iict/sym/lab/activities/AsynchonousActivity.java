@@ -73,6 +73,7 @@ public class AsynchonousActivity extends AppCompatActivity {
                                     etTextToSend.getText().toString(),
                                     HTTPMethod.POST,
                                     "test/plain",
+                                    false,
                                     null)
                             );
                         }

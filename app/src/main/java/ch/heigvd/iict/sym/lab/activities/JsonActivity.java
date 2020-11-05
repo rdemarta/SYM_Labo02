@@ -82,6 +82,7 @@ public class JsonActivity extends AppCompatActivity {
                                     new User(etfirstName.getText().toString(), etLastName.getText().toString(), Integer.parseInt(etAge.getText().toString())).serialize().toString(),
                                     HTTPMethod.POST,
                                     "test/plain",
+                                    false,
                                     null)
                             );
                         }
