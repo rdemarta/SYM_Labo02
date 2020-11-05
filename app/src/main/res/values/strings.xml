@@ -15,4 +15,17 @@
     <string name="json_last_name">Nom</string>
     <string name="json_age">Age</string>
     <string name="json_toast_send_successfully">L\'utilisateur a bien été envoyé</string>
+    <string name="xml_middle_name">Deuxième prénom</string>
+    <string name="xml_gender">Sexe</string>
+    <string name="xml_female">Femme</string>
+    <string name="xml_male">Homme</string>
+    <string name="xml_phoneNumber">Numéro de téléphone</string>
+    <string name="main_xml_btn">XML</string>
+    <string name="xml_addInDirectory">Ajouter dans l\'anunuaire</string>
+    <string name="xml_mandatoryField">Champ obligatoire</string>
+    <string name="xml_numberType">Type de numéro</string>
+    <string name="xml_phoneNumberOptional">Numéro de téléphone (Optionel)</string>
+    <string name="xml_action_title">Transmission XML</string>
+    <string name="xml_toast_empty_directory">Annuaire vide, rien à envoyer</string>
+    <string name="xml_toast_add_new_person">Nouvelle personne ajoutée dans l\'annuaire</string>
 </resources>

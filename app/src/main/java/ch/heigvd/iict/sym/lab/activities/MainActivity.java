@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnAsynchronous = findViewById(R.id.main_btnAsynchronous);
         Button btnDelayed = findViewById(R.id.main_btnDelayed);
         Button btnJson = findViewById(R.id.main_btnJson);
+        Button btnXml = findViewById(R.id.main_btnXml);
 
         btnAsynchronous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, JsonActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnXml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, XmlActivity.class);
                 startActivity(intent);
             }
         });
