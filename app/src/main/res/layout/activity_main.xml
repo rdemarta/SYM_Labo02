@@ -47,6 +47,7 @@
             android:layout_marginHorizontal="60dp"
             android:text="@string/main_delayed_btn" />
 
+        <!-- JSON button -->
         <Button
             android:id="@+id/main_btnJson"
             android:layout_width="match_parent"
@@ -55,6 +56,7 @@
             android:layout_marginHorizontal="60dp"
             android:text="@string/main_json_btn" />
 
+        <!-- XML button -->
         <Button
             android:id="@+id/main_btnXml"
             android:layout_width="match_parent"
@@ -62,6 +64,15 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="60dp"
             android:text="@string/main_xml_btn" />
+
+        <!-- Compressed button -->
+        <Button
+            android:id="@+id/main_btnCompressed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="60dp"
+            android:text="@string/main_compressed_btn" />
 
     </LinearLayout>
 

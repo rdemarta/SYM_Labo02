@@ -29,4 +29,11 @@
     <string name="xml_action_title">Transmission XML</string>
     <string name="xml_toast_empty_directory">Annuaire vide, rien à envoyer</string>
     <string name="xml_toast_add_new_person">Nouvelle personne ajoutée dans l\'annuaire</string>
+    <string name="main_compressed_btn">Compressée</string>
+    <string name="compressed_actionbar_title">Transmission compressée</string>
+    <string name="compressed_first_name">Prénom</string>
+    <string name="compressed_last_name">Nom</string>
+    <string name="compressed_age">Age</string>
+    <string name="compressed_toast_send_successfully">L\'utilisateur a bien été envoyé</string>
+    <string name="compressed_cannot_be_empty">Ne peut pas être vide</string>
 </resources>
