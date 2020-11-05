@@ -63,6 +63,14 @@
             android:layout_marginHorizontal="60dp"
             android:text="@string/main_xml_btn" />
 
+        <Button
+            android:id="@+id/main_btnGraphQl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="60dp"
+            android:text="@string/main_graphQl_btn" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

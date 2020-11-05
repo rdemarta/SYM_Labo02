@@ -30,4 +30,5 @@
     <string name="xml_toast_add_new_person">Nouvelle personne ajoutée dans l\'annuaire</string>
     <string name="graphql_AuthorChoice">1. Choix d\'un auteur:</string>
     <string name="graphql_Posts">2. Postes de l\'auteur</string>
+    <string name="main_graphQl_btn">GraphQL</string>
 </resources>
