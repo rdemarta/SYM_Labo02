@@ -15,6 +15,7 @@
     <string name="json_last_name">Nom</string>
     <string name="json_age">Age</string>
     <string name="json_toast_send_successfully">L\'utilisateur a bien été envoyé</string>
+    <string name="json_cannot_be_empty">Ne peut pas être vide</string>
     <string name="xml_middle_name">Deuxième prénom</string>
     <string name="xml_gender">Sexe</string>
     <string name="xml_female">Femme</string>
