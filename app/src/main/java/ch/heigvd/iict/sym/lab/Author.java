@@ -1,6 +1,18 @@
 package ch.heigvd.iict.sym.lab;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Author {
+
+    private final static String TAG_ID = "id";
+    private final static String TAG_FIRST_NAME = "first_name";
+    private final static String TAG_LAST_NAME = "last_name";
 
     private int id;
     private String firstName;
@@ -18,5 +30,22 @@ public class Author {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static List<Author> parseAuthors(JSONArray authors) throws JSONException {
+        List<Author> res = new ArrayList<>();
+        for (int i = 0; i < authors.length(); i++) {
+            JSONObject author = authors.getJSONObject(i);
+
+            res.add(
+                    new Author(author.getInt(TAG_ID),
+                            author.getString(TAG_FIRST_NAME),
+                            author.getString(TAG_LAST_NAME)));
+        }
+        return res;
     }
 }

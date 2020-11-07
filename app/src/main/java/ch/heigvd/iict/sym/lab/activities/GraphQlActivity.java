@@ -11,9 +11,11 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,10 +25,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ch.heigvd.iict.sym.lab.Author;
+import ch.heigvd.iict.sym.lab.Post;
 import ch.heigvd.iict.sym.lab.R;
 import ch.heigvd.iict.sym.lab.comm.CommunicationEventListener;
 import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
@@ -40,29 +44,24 @@ public class GraphQlActivity extends AppCompatActivity {
     private final static String LOG_TAG = "GRAPHQL_ACTIVITY";
 
     private final static String TAG_All_AUTHORS = "allAuthors";
-    private final static String TAG_ID = "id";
-    private final static String TAG_FIRST_NAME = "first_name";
-    private final static String TAG_LAST_NAME = "last_name";
-
+    private final static String TAG_DATA = "data";
+    private final static String TAG_ALL_POST_BY_AUTHOR = "allPostByAuthor";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_ql);
 
-        final Spinner spAuthors = findViewById(R.id.graphql_spAuthors);
-        ScrollView svAllPosts = findViewById(R.id.graphql_svAllPosts);
-
         final String serverURL = "http://sym.iict.ch/api/graphql";
 
+        final Spinner spAuthors = findViewById(R.id.graphql_spAuthors);
         final List<Author> authors = new ArrayList<>();
-
         final ArrayAdapter<Author> authorAdapter = new ArrayAdapter<Author>(GraphQlActivity.this, R.layout.support_simple_spinner_dropdown_item, authors) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-
+                // Override the text displayed in the spinner
                 View view = super.getView(position, convertView, parent);
                 Author item = getItem(position);
                 ((TextView) view).setText(item.getFirstName() + " " + item.getLastName());
@@ -77,6 +76,109 @@ public class GraphQlActivity extends AppCompatActivity {
         };
 
 
+        ListView lvPosts = findViewById(R.id.graphql_lvPosts);
+        final List<Post> posts = new ArrayList<>();
+        final ArrayAdapter<Post> postAdapter = new ArrayAdapter<Post>(this, R.layout.listview_post_item, R.id.post_item_title,posts) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+
+                Post post = getItem(position);
+
+                TextView tvTitle = view.findViewById(R.id.post_item_title);
+                tvTitle.setText(post.getTitle());
+
+                TextView tvDescription = view.findViewById(R.id.post_item_description);
+                tvDescription.setText(post.getDescription());
+
+                TextView tvDate = view.findViewById(R.id.post_item_date);
+                tvDate.setText(post.getDate().toString());
+
+                return view;
+            }
+        };
+        lvPosts.setAdapter(postAdapter);
+
+
+        final Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                if (msg.getData().containsKey(TAG_FROM_SERVER_AUTHORS)) {
+                    try {
+                        JSONObject object = new JSONObject(msg.getData().getString(TAG_FROM_SERVER_AUTHORS));
+                        JSONArray authorsJson = object.getJSONObject(TAG_DATA).getJSONArray(TAG_All_AUTHORS);
+
+                        authors.addAll(Author.parseAuthors(authorsJson));
+
+                        spAuthors.setAdapter(authorAdapter);
+
+                        authorAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(GraphQlActivity.this, "List des auteurs chargé !", Toast.LENGTH_LONG).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else if (msg.getData().get(TAG_FROM_SERVER_POSTS) != null) {
+                    Log.d(LOG_TAG, msg.getData().getString(TAG_FROM_SERVER_POSTS));
+                    try {
+                        JSONObject object = new JSONObject(msg.getData().getString(TAG_FROM_SERVER_POSTS));
+                        JSONArray postsJson = object.getJSONObject(TAG_DATA).getJSONArray(TAG_ALL_POST_BY_AUTHOR);
+
+                        posts.clear();
+                        posts.addAll(Post.parsePosts(postsJson));
+
+                        postAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(GraphQlActivity.this, "List des posts chargé !", Toast.LENGTH_LONG).show();
+
+                    } catch (JSONException | ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+
+        spAuthors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                final int itemId = ((Author) parent.getItemAtPosition(position)).getId();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SymComManager symComManager = new SymComManager();
+                        symComManager.setCommunicationEventListener(new CommunicationEventListener() {
+                            @Override
+                            public boolean handleServerResponse(String response) {
+                                Message msg = handler.obtainMessage();
+                                Bundle b = new Bundle();
+                                b.putString(TAG_FROM_SERVER_POSTS, response);
+                                msg.setData(b);
+                                handler.sendMessage(msg);
+                                return true;
+                            }
+                        });
+
+                        String query = "{\"query\": \"{allPostByAuthor(authorId:" + itemId + "){title description date}}\"}";
+                        Log.d(LOG_TAG, query);
+                        symComManager.sendRequest(new SymComRequest(
+                                serverURL,
+                                query,
+                                HTTPMethod.POST,
+                                "application/json",
+                                null
+                        ));
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         // Get all authors
         // id to retrieve the corresponding posts
         //     "query": "{allAuthors{id first_name last_name}}"
@@ -89,28 +191,6 @@ public class GraphQlActivity extends AppCompatActivity {
         // 3. send the id to retrive the posts for this authors
         // Display => LiveData
 
-        final Handler handler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                if (msg.getData().containsKey(TAG_FROM_SERVER_AUTHORS)) {
-                    try {
-                        JSONObject object = new JSONObject(msg.getData().getString(TAG_FROM_SERVER_AUTHORS));
-
-                        authors.addAll(parseAuthors(object.getJSONObject("data")));
-
-                        spAuthors.setAdapter(authorAdapter);
-
-                        authorAdapter.notifyDataSetChanged();
-
-                        Toast.makeText(GraphQlActivity.this, "List des auteurs chargé !", Toast.LENGTH_LONG).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else if (msg.getData().get(TAG_FROM_SERVER_POSTS) != null) {
-                    Log.d(LOG_TAG, msg.getData().getString(TAG_FROM_SERVER_POSTS));
-                }
-            }
-        };
 
         new Thread(new Runnable() {
             @Override
@@ -143,18 +223,6 @@ public class GraphQlActivity extends AppCompatActivity {
         }).start();
     }
 
-    private List<Author> parseAuthors(JSONObject object) throws JSONException {
-        JSONArray authors = object.getJSONArray(TAG_All_AUTHORS);
-        List<Author> res = new ArrayList<>();
-        for (int i = 0; i < authors.length(); i++) {
-            JSONObject author = authors.getJSONObject(i);
 
-            res.add(
-                    new Author(author.getInt(TAG_ID),
-                            author.getString(TAG_FIRST_NAME),
-                            author.getString(TAG_LAST_NAME)));
-        }
-        return res;
-    }
 }
 

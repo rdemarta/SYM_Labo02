@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.heigvd.iict.sym.lab.activities.GraphQlActivity"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context="ch.heigvd.iict.sym.lab.activities.GraphQlActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/graphql_AuthorChoice"/>
+        android:text="@string/graphql_AuthorChoice" />
 
     <Spinner
         android:id="@+id/graphql_spAuthors"
@@ -21,14 +21,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/graphql_Posts"/>
+        android:text="@string/graphql_Posts" />
 
-    <ScrollView
-        android:id="@+id/graphql_svAllPosts"
+    <ListView
+        android:id="@+id/graphql_lvPosts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_height="wrap_content" />
 
-    </ScrollView>
 </LinearLayout>
