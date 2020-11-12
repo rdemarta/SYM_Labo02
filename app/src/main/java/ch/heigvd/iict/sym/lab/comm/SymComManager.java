@@ -45,32 +45,34 @@ public class SymComManager {
             // Write the output
             byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
 
-            if(request.getCompress()) {
+            InputStreamReader in;
+
+            if(request.getCompress()) { // Send compressed message
                 DeflaterOutputStream dos = new DeflaterOutputStream(con.getOutputStream(), new Deflater(9, true));
                 dos.write(input, 0, input.length);
                 dos.close();
 
-                // Read the response
-                InflaterInputStream in = new InflaterInputStream(con.getInputStream(), new Inflater(true));
-                // TODO read results
-            } else {
+                in = new InputStreamReader(new InflaterInputStream(con.getInputStream(), new Inflater(true)), StandardCharsets.UTF_8);
+
+            } else { // Send uncompressed message
                 OutputStream os = con.getOutputStream();
                 os.write(input, 0, input.length);
 
-                // Read the response
-                InputStreamReader in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
-                BufferedReader br = new BufferedReader(in);
-                StringBuilder response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim() + "\n");
-                }
-
-                Log.d(LOG_TAG, response.toString());
-
-                // Callback call to notify the response
-                communicationEventListener.handleServerResponse(response.toString());
+                in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
             }
+
+            // Read the response
+            BufferedReader br = new BufferedReader(in);
+            StringBuilder response = new StringBuilder();
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim() + "\n");
+            }
+
+            Log.d(LOG_TAG, response.toString());
+
+            // Callback call to notify the response
+            communicationEventListener.handleServerResponse(response.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

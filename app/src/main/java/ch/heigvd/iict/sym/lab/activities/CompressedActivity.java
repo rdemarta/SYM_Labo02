@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.heigvd.iict.sym.lab.R;
@@ -36,6 +37,7 @@ public class CompressedActivity extends AppCompatActivity { // TODO move to acti
         final EditText etfirstName = findViewById(R.id.compressed_etFirstName);
         final EditText etAge = findViewById(R.id.compressed_etAge);
         final Button btnSend = findViewById(R.id.compressed_btnSend);
+        final TextView tvDataReceived = findViewById(R.id.compressed_tvDataReceived);
         final String serverURL = "http://sym.iict.ch/rest/json";
 
         // Create the Handler to be able to modify the UIthread when receive specific message
@@ -43,6 +45,7 @@ public class CompressedActivity extends AppCompatActivity { // TODO move to acti
             @Override
             public void handleMessage(Message msg) {
                 Log.d(LOG_TAG, msg.getData().getString(TAG_FROM_SERVER));
+                tvDataReceived.setText(msg.getData().getString(TAG_FROM_SERVER));
                 Toast.makeText(CompressedActivity.this, getString(R.string.compressed_toast_send_successfully), Toast.LENGTH_LONG).show();
             }
         };
