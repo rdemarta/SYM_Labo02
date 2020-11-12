@@ -81,7 +81,7 @@ public class CompressedActivity extends AppCompatActivity { // TODO move to acti
                                     serverURL,
                                     new User(etfirstName.getText().toString(), etLastName.getText().toString(), Integer.parseInt(etAge.getText().toString())).serialize().toString(),
                                     HTTPMethod.POST,
-                                    "test/plain",
+                                    "application/json",
                                     true,
                                     null)
                             );

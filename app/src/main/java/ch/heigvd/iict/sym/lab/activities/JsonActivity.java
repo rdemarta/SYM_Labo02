@@ -81,7 +81,7 @@ public class JsonActivity extends AppCompatActivity {
                                     serverURL,
                                     new User(etfirstName.getText().toString(), etLastName.getText().toString(), Integer.parseInt(etAge.getText().toString())).serialize().toString(),
                                     HTTPMethod.POST,
-                                    "test/plain",
+                                    "application/json",
                                     false,
                                     null)
                             );

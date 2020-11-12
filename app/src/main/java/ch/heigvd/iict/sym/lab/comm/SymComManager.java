@@ -46,8 +46,9 @@ public class SymComManager {
             byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
 
             if(request.getCompress()) {
-                DeflaterOutputStream dos = new DeflaterOutputStream(con.getOutputStream(), new Deflater(0, true));
-                dos.write(input, 0, input.length); // TODO data not sent?
+                DeflaterOutputStream dos = new DeflaterOutputStream(con.getOutputStream(), new Deflater(9, true));
+                dos.write(input, 0, input.length);
+                dos.close();
 
                 // Read the response
                 InflaterInputStream in = new InflaterInputStream(con.getInputStream(), new Inflater(true));
