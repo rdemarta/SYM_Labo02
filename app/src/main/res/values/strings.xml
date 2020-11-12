@@ -32,4 +32,8 @@
     <string name="graphql_Posts">2. Postes de l\'auteur</string>
     <string name="main_graphQl_btn">GraphQL</string>
     <string name="post_item_title">Titre</string>
+    <string name="post_item_description">Description</string>
+    <string name="post_item_date">Date</string>
+    <string name="graphql_toast_authors_load">List des auteurs chargé !</string>
+    <string name="graphql_toast_posts_load">List des posts chargées !</string>
 </resources>

@@ -36,15 +36,21 @@ public class Author {
         return id;
     }
 
+    /**
+     * Transform a json array into a list of authors
+     *
+     * @param authors a json array contains authors data
+     * @return a list of authors
+     * @throws JSONException
+     */
     public static List<Author> parseAuthors(JSONArray authors) throws JSONException {
         List<Author> res = new ArrayList<>();
         for (int i = 0; i < authors.length(); i++) {
             JSONObject author = authors.getJSONObject(i);
 
-            res.add(
-                    new Author(author.getInt(TAG_ID),
-                            author.getString(TAG_FIRST_NAME),
-                            author.getString(TAG_LAST_NAME)));
+            res.add(new Author(author.getInt(TAG_ID),
+                    author.getString(TAG_FIRST_NAME),
+                    author.getString(TAG_LAST_NAME)));
         }
         return res;
     }

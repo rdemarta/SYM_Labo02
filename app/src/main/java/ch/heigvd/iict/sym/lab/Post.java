@@ -38,6 +38,13 @@ public class Post {
         return date;
     }
 
+    /**
+     * Transform a json array into a list of posts
+     * @param posts the json with the posts data
+     * @return a list of posts
+     * @throws JSONException
+     * @throws ParseException
+     */
     public static List<Post> parsePosts(JSONArray posts) throws JSONException, ParseException {
         List<Post> res = new ArrayList<>();
 

@@ -56,14 +56,19 @@ public class GraphQlActivity extends AppCompatActivity {
 
         final Spinner spAuthors = findViewById(R.id.graphql_spAuthors);
         final List<Author> authors = new ArrayList<>();
+        // Create a new adapter for our spinner
         final ArrayAdapter<Author> authorAdapter = new ArrayAdapter<Author>(GraphQlActivity.this, R.layout.support_simple_spinner_dropdown_item, authors) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-                // Override the text displayed in the spinner
+                // Get the view
                 View view = super.getView(position, convertView, parent);
+
+                // get item at the position
                 Author item = getItem(position);
+
+                // Override the text displayed in the spinner
                 ((TextView) view).setText(item.getFirstName() + " " + item.getLastName());
                 return view;
             }
@@ -75,29 +80,37 @@ public class GraphQlActivity extends AppCompatActivity {
             }
         };
 
+        spAuthors.setAdapter(authorAdapter);
 
         ListView lvPosts = findViewById(R.id.graphql_lvPosts);
         final List<Post> posts = new ArrayList<>();
-        final ArrayAdapter<Post> postAdapter = new ArrayAdapter<Post>(this, R.layout.listview_post_item, R.id.post_item_title,posts) {
+
+        // set a adapter for our list view
+        final ArrayAdapter<Post> postAdapter = new ArrayAdapter<Post>(this, R.layout.listview_post_item, R.id.post_item_title, posts) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+                // Get the view
                 View view = super.getView(position, convertView, parent);
 
+                // get the item at the position
                 Post post = getItem(position);
 
+                // bind the interface with the code
                 TextView tvTitle = view.findViewById(R.id.post_item_title);
-                tvTitle.setText(post.getTitle());
-
                 TextView tvDescription = view.findViewById(R.id.post_item_description);
-                tvDescription.setText(post.getDescription());
-
                 TextView tvDate = view.findViewById(R.id.post_item_date);
+
+                // Set the text
+                tvDescription.setText(post.getDescription());
+                tvTitle.setText(post.getTitle());
                 tvDate.setText(post.getDate().toString());
 
                 return view;
             }
         };
+
         lvPosts.setAdapter(postAdapter);
 
 
@@ -106,31 +119,38 @@ public class GraphQlActivity extends AppCompatActivity {
             public void handleMessage(@NonNull Message msg) {
                 if (msg.getData().containsKey(TAG_FROM_SERVER_AUTHORS)) {
                     try {
+
+                        // Get the data in the message as a json object
                         JSONObject object = new JSONObject(msg.getData().getString(TAG_FROM_SERVER_AUTHORS));
                         JSONArray authorsJson = object.getJSONObject(TAG_DATA).getJSONArray(TAG_All_AUTHORS);
 
+                        // add the received data in the list
                         authors.addAll(Author.parseAuthors(authorsJson));
 
-                        spAuthors.setAdapter(authorAdapter);
-
+                        // notify the adapter that data has changed
                         authorAdapter.notifyDataSetChanged();
 
-                        Toast.makeText(GraphQlActivity.this, "List des auteurs chargé !", Toast.LENGTH_LONG).show();
+                        Toast.makeText(GraphQlActivity.this, R.string.graphql_toast_authors_load, Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 } else if (msg.getData().get(TAG_FROM_SERVER_POSTS) != null) {
                     Log.d(LOG_TAG, msg.getData().getString(TAG_FROM_SERVER_POSTS));
                     try {
+                        // Get the data in the message as a json object
                         JSONObject object = new JSONObject(msg.getData().getString(TAG_FROM_SERVER_POSTS));
                         JSONArray postsJson = object.getJSONObject(TAG_DATA).getJSONArray(TAG_ALL_POST_BY_AUTHOR);
 
+                        // clean the list
                         posts.clear();
+
+                        // Add new posts
                         posts.addAll(Post.parsePosts(postsJson));
 
+                        // notify the adapter that data has changed
                         postAdapter.notifyDataSetChanged();
 
-                        Toast.makeText(GraphQlActivity.this, "List des posts chargé !", Toast.LENGTH_LONG).show();
+                        Toast.makeText(GraphQlActivity.this, R.string.graphql_toast_posts_load, Toast.LENGTH_LONG).show();
 
                     } catch (JSONException | ParseException e) {
                         e.printStackTrace();
@@ -160,8 +180,8 @@ public class GraphQlActivity extends AppCompatActivity {
                             }
                         });
 
+                        // Query to sent to the server to retrieve the post by author id
                         String query = "{\"query\": \"{allPostByAuthor(authorId:" + itemId + "){title description date}}\"}";
-                        Log.d(LOG_TAG, query);
                         symComManager.sendRequest(new SymComRequest(
                                 serverURL,
                                 query,
@@ -179,19 +199,8 @@ public class GraphQlActivity extends AppCompatActivity {
             }
         });
 
-        // Get all authors
-        // id to retrieve the corresponding posts
-        //     "query": "{allAuthors{id first_name last_name}}"
 
-        // Get all posts by id
-        // "query": "{allPostByAuthor(authorId:1){title description content date}}"
-
-        // 1. get All authors to populate the spinner
-        // 2. retrieve the author id
-        // 3. send the id to retrive the posts for this authors
-        // Display => LiveData
-
-
+        // This thread is use to retrieve all authors in the server
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -208,6 +217,7 @@ public class GraphQlActivity extends AppCompatActivity {
                     }
                 });
 
+                // Query to retrieve all authors
                 String query = "{\"query\": \"{allAuthors{id first_name last_name}}\"}";
                 Log.d(LOG_TAG, query);
                 symComManager.sendRequest(new SymComRequest(
