@@ -45,23 +45,21 @@ public class SymComManager {
             // Write the output
             byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
 
-            InputStreamReader in;
+            // Prepare output stream (send request)
+            OutputStream os = request.getCompress() ?
+                    new DeflaterOutputStream(con.getOutputStream(), new Deflater(9, true))
+                    : con.getOutputStream();
 
-            if(request.getCompress()) { // Send compressed message
-                DeflaterOutputStream dos = new DeflaterOutputStream(con.getOutputStream(), new Deflater(9, true));
-                dos.write(input, 0, input.length);
-                dos.close();
+            // Send request
+            os.write(input, 0, input.length);
+            os.close();
 
-                in = new InputStreamReader(new InflaterInputStream(con.getInputStream(), new Inflater(true)), StandardCharsets.UTF_8);
+            // Prepare input stream (read response)
+            InputStreamReader in = request.getCompress() ?
+                    new InputStreamReader(new InflaterInputStream(con.getInputStream(), new Inflater(true)), StandardCharsets.UTF_8)
+                    : new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
 
-            } else { // Send uncompressed message
-                OutputStream os = con.getOutputStream();
-                os.write(input, 0, input.length);
-
-                in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
-            }
-
-            // Read the response
+            // Read response
             BufferedReader br = new BufferedReader(in);
             StringBuilder response = new StringBuilder();
             String responseLine = null;
