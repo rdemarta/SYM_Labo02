@@ -187,6 +187,7 @@ public class GraphQlActivity extends AppCompatActivity {
                                 query,
                                 HTTPMethod.POST,
                                 "application/json",
+                                false,
                                 null
                         ));
                     }
@@ -225,6 +226,7 @@ public class GraphQlActivity extends AppCompatActivity {
                         query,
                         HTTPMethod.POST,
                         "application/json",
+                        false,
                         null
                 ));
 
