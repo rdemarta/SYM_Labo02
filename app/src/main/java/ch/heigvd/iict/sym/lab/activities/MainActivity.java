@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnJson = findViewById(R.id.main_btnJson);
         Button btnXml = findViewById(R.id.main_btnXml);
         Button btnGraphQl = findViewById(R.id.main_btnGraphQl);
+        Button compressedBtn = findViewById(R.id.main_btnCompressed);
 
         btnAsynchronous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, GraphQlActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        compressedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CompressedActivity.class);
                 startActivity(intent);
             }
         });

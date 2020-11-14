@@ -9,6 +9,10 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
 
 public class SymComManager {
 
@@ -24,6 +28,9 @@ public class SymComManager {
             // SetParams
             con.setRequestMethod(request.getHttpMethod().toString());
             con.setRequestProperty("Content-Type", request.getContentType());
+            if(request.getCompress()) {
+                con.setRequestProperty("X-Content-Encoding", "deflate");
+            }
 
             // We have no network speed explicitly selected => don't send header and the server will choose one randomly
             if(request.getNetworkSpeed() != null){
@@ -36,12 +43,23 @@ public class SymComManager {
             }
 
             // Write the output
-            OutputStream os = con.getOutputStream();
             byte[] input = request.getMessage().getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
 
-            // Read the response
-            InputStreamReader in = new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
+            // Prepare output stream (send request)
+            OutputStream os = request.getCompress() ?
+                    new DeflaterOutputStream(con.getOutputStream(), new Deflater(9, true))
+                    : con.getOutputStream();
+
+            // Send request
+            os.write(input, 0, input.length);
+            os.close();
+
+            // Prepare input stream (read response)
+            InputStreamReader in = request.getCompress() ?
+                    new InputStreamReader(new InflaterInputStream(con.getInputStream(), new Inflater(true)), StandardCharsets.UTF_8)
+                    : new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8);
+
+            // Read response
             BufferedReader br = new BufferedReader(in);
             StringBuilder response = new StringBuilder();
             String responseLine = null;

@@ -37,4 +37,11 @@
     <string name="post_item_date">Date</string>
     <string name="graphql_toast_authors_load">List des auteurs chargé !</string>
     <string name="graphql_toast_posts_load">List des posts chargées !</string>
+    <string name="main_compressed_btn">Compressée</string>
+    <string name="compressed_actionbar_title">Transmission compressée</string>
+    <string name="compressed_first_name">Prénom</string>
+    <string name="compressed_last_name">Nom</string>
+    <string name="compressed_age">Age</string>
+    <string name="compressed_toast_send_successfully">L\'utilisateur a bien été envoyé</string>
+    <string name="compressed_cannot_be_empty">Ne peut pas être vide</string>
 </resources>

@@ -62,6 +62,7 @@ public class DelayedActivity extends AppCompatActivity {
                                     valueToSend,
                                     HTTPMethod.POST,
                                     "text/plain",
+                                    false,
                                     null)
                             );
                         }

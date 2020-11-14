@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activities.GraphQlActivity"></activity>
         <activity
+            android:name=".activities.CompressedActivity"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity
             android:name=".activities.JsonActivity"
-            android:parentActivityName=".activities.JsonActivity" />
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.DelayedActivity"
             android:parentActivityName=".activities.MainActivity" />

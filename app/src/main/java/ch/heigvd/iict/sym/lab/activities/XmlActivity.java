@@ -183,6 +183,7 @@ public class XmlActivity extends AppCompatActivity {
                                     directory.xmlSerialize(),
                                     HTTPMethod.POST,
                                     "application/xml",
+                                    false,
                                     null)
                             );
                         }
