@@ -52,6 +52,9 @@ public class GraphQlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_ql);
 
+        // Set the actionbar title
+        getSupportActionBar().setTitle(R.string.graphql_title);
+
         final String serverURL = "http://sym.iict.ch/api/graphql";
 
         final Spinner spAuthors = findViewById(R.id.graphql_spAuthors);

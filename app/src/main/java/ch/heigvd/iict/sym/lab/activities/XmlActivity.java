@@ -117,7 +117,6 @@ public class XmlActivity extends AppCompatActivity {
 
                 phones.add(phone);
 
-                // TODO change into a recycle view to reuse the inputs for the phone number
                 // With that user can add more than 2 phone numbers
                 if (!etPhoneNumberOptional.getText().toString().isEmpty()) {
                     Phone optionalPhone = new Phone(etPhoneNumberOptional.getText().toString(), (PhoneType) spPhoneTypeOptional.getSelectedItem());

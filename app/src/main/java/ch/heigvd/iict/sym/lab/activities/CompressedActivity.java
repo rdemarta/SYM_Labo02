@@ -20,7 +20,7 @@ import ch.heigvd.iict.sym.lab.comm.HTTPMethod;
 import ch.heigvd.iict.sym.lab.comm.SymComManager;
 import ch.heigvd.iict.sym.lab.comm.SymComRequest;
 
-public class CompressedActivity extends AppCompatActivity { // TODO move to activities folder
+public class CompressedActivity extends AppCompatActivity {
 
     private final static String LOG_TAG = "COMPRESSED_ACTIVITY";
     private final static String TAG_FROM_SERVER = "FROM_SERVER";
